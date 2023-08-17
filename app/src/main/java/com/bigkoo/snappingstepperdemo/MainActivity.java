@@ -3,6 +3,7 @@ package com.bigkoo.snappingstepperdemo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements SnappingStepperVa
         stepperCustom.setButtonBackGround(R.drawable.sl_steppercustom_button_bg);
         stepperCustom.setContentBackground(R.color.colorStepperContentBg);
         stepperCustom.setContentTextColor(R.color.colorStepperText);
-        stepperCustom.setContentTextSize(18);
+        stepperCustom.setContentTextSize(  (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18,
+               this.getResources().getDisplayMetrics()));
         stepperCustom.setLeftButtonResources(R.drawable.ic_stepper_left);
         stepperCustom.setRightButtonResources(R.drawable.ic_stepper_right);
     }

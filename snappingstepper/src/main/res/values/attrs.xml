@@ -14,10 +14,12 @@
         <attr name="stepper_buttonBackground" format="color|reference"/>
         <attr name="stepper_contentBackground" format="color|reference"/>
         <attr name="stepper_contentTextColor" format="color"/>
-        <attr name="stepper_contentTextSize" format="float"/>
+        <attr name="stepper_contentTextSize" format="reference|dimension"/>
         <attr name="stepper_leftButtonBackground" format="color|reference"/>
         <attr name="stepper_rightButtonBackground" format="color|reference"/>
         <attr name="stepper_leftButtonResources" format="color|reference"/>
         <attr name="stepper_rightButtonResources" format="color|reference"/>
+        <attr name="stepper_leftButtonWidth" format="reference|dimension"/>
+        <attr name="stepper_rightButtonWidth" format="reference|dimension"/>
     </declare-styleable>
 </resources>

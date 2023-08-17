@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -98,6 +100,8 @@ public class SnappingStepper extends RelativeLayout implements View.OnTouchListe
         ivStepperPlus = (ImageView) findViewById(R.id.ivStepperPlus);
 
         String text = "";
+        int rightButtonSize = 30;
+        int leftButtonSize=30;
         Drawable background = null;
         Drawable contentBackground = null;
         Drawable leftButtonResources = null;
@@ -126,7 +130,18 @@ public class SnappingStepper extends RelativeLayout implements View.OnTouchListe
 
             contentTextColor = a.getColor(R.styleable.SnappingStepper_stepper_contentTextColor, contentTextColor);
 
-            contentTextSize = a.getFloat(R.styleable.SnappingStepper_stepper_contentTextSize, 0);
+            contentTextSize =
+                    a.getDimensionPixelSize(R.styleable.SnappingStepper_stepper_contentTextSize,
+                            (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 0,
+                                    getContext().getResources().getDisplayMetrics()));
+
+            rightButtonSize = a.getDimensionPixelSize(R.styleable.SnappingStepper_stepper_rightButtonWidth,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30,
+                            getContext().getResources().getDisplayMetrics()));
+
+            leftButtonSize = a.getDimensionPixelSize(R.styleable.SnappingStepper_stepper_leftButtonWidth,
+                    (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 30,
+                            getContext().getResources().getDisplayMetrics()));
             a.recycle();
         }
 
@@ -149,6 +164,18 @@ public class SnappingStepper extends RelativeLayout implements View.OnTouchListe
         }
         if (rightButtonBackground != null) {
             ivStepperPlus.setBackgroundDrawable(rightButtonBackground);
+        }
+
+
+        if (rightButtonSize!=30) {
+            ViewGroup.LayoutParams layoutParams = ivStepperMinus.getLayoutParams();
+            layoutParams.width=leftButtonSize;
+            ivStepperMinus.setLayoutParams(layoutParams);
+        }
+        if (rightButtonSize!=30) {
+            ViewGroup.LayoutParams layoutParams = ivStepperPlus.getLayoutParams();
+            layoutParams.width=rightButtonSize;
+            ivStepperPlus.setLayoutParams(layoutParams);
         }
 
         if (leftButtonResources != null) {
@@ -479,7 +506,7 @@ public class SnappingStepper extends RelativeLayout implements View.OnTouchListe
      * @param size
      */
     public void setContentTextSize(float size) {
-        tvStepperContent.setTextSize(size);
+        tvStepperContent.setTextSize(TypedValue.COMPLEX_UNIT_PX,size);
     }
 
     /**
@@ -491,6 +518,8 @@ public class SnappingStepper extends RelativeLayout implements View.OnTouchListe
         ivStepperMinus.setBackgroundResource(resId);
         ivStepperPlus.setBackgroundResource(resId);
     }
+
+
 
     /**
      * 设置按钮资源
